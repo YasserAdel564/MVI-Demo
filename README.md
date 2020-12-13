@@ -16,6 +16,6 @@ MVI-Demo is Simple App For Request List of Users with Implementing MVI Architect
  * Apply DI
 
 ## License
-* This project is licensed under the MIT License - see the [License](https://github.com/YasserAdel564/Gift-Stores/blob/master/License)
+* This project is licensed under the MIT License - see the [License](https://github.com/YasserAdel564/MVI-Demo/blob/master/License)
  file for details
 
