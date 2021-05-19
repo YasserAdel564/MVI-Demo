@@ -11,5 +11,5 @@
     <color name="colorSecondaryGray">#232323A8</color>
     <color name="colorLightGray">#4B4B4B73</color>
     <color name="colorRed">#E22727</color>
-
+    <color name="background">#7BE4E4E4</color>
 </resources>

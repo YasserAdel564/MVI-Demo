@@ -1,12 +1,13 @@
-package com.mviarchitecture.app.ui.users.viewmodel
+package com.mviarchitecture.app.ui.home
 
 import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.NetworkUtils
-import com.mviarchitecture.app.data.repos.UserRepo
-import com.mviarchitecture.app.ui.users.intent.UserIntent
-import com.mviarchitecture.app.ui.users.state.UserStates
+import com.mviarchitecture.app.data.repos.VehiclesRepo
+import com.mviarchitecture.app.ui.home.intent.UserIntent
+import com.mviarchitecture.app.ui.home.state.UserStates
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,18 +15,23 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
-class UserViewModel : ViewModel() {
+class HomeVM @ViewModelInject
+constructor(
+    private val repository: VehiclesRepo,
+) : ViewModel() {
 
-    private val repository = UserRepo()
+    init {
+        handleIntent()
+    }
+
     val userIntent = Channel<UserIntent>(Channel.UNLIMITED)
     private val _state = MutableStateFlow<UserStates>(UserStates.Idle)
     val state: StateFlow<UserStates>
         get() = _state
 
+    var lat: Double? = null
+    var lng: Double? = null
 
-    init {
-        handleIntent()
-    }
 
     private fun handleIntent() {
         viewModelScope.launch {
@@ -43,13 +49,19 @@ class UserViewModel : ViewModel() {
         viewModelScope.launch {
             if (NetworkUtils.isConnected()) {
                 _state.value = try {
-                    UserStates.Success(repository.getUsers())
+                    UserStates.Success(repository.getData(lat, lng))
                 } catch (e: Exception) {
+                    Log.e("Exception", e.message.toString())
                     UserStates.Error(e.localizedMessage)
                 }
             } else {
                 _state.value = UserStates.NoConnection
             }
         }
+    }
+
+    fun clearLocation() {
+        lat = null
+        lng = null
     }
 }

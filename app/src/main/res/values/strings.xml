@@ -4,5 +4,16 @@
     <string name="no_connection">No Internet Connection</string>
     <string name="no_data">No Data Available</string>
     <string name="error">Error Try Again</string>
+    <string name="splash_label">Splash</string>
+    <string name="home_label">Home</string>
+
+
+    <string name="commodity">Commodity</string>
+    <string name="truck_type">Truck Type</string>
+    <string name="bids">Number Of Bids</string>
+    <string name="price">Price</string>
+    <string name="address">Addresses</string>
+    <string name="permissions_needed">App needs some permissions to access Your Location</string>
+    <string name="permissions_denied">Permission Denied</string>
 
 </resources>

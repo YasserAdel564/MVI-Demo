@@ -2,21 +2,22 @@ package com.mviarchitecture.app
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.provider.Settings
 import com.blankj.utilcode.util.Utils
+import dagger.hilt.android.HiltAndroidApp
 
 
-class App : Application() {
+@HiltAndroidApp
+class MyApp : Application() {
 
-    @SuppressLint("HardwareIds")
     override fun onCreate() {
         super.onCreate()
         instance = this
         Utils.init(this)
-
     }
+
     companion object {
-        lateinit var instance: App
+        lateinit var instance: MyApp
             private set
     }
+
 }
